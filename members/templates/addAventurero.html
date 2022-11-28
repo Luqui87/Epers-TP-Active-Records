@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Aventurero</title>
+</head>
+<body>
+  <h1>Agregar Aventurero</h1>
+
+  <form action="addrecord/" method="post">
+  {% csrf_token %}
+    Nombre:<br>
+  <input name="nombre">
+  <br><br>
+  Vida:<br>
+  <input name="vida">
+  <br><br>
+  <input type="submit" value="Submit">
+  </form>
+</body>
+</html>
