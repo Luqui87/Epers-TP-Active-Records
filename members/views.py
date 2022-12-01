@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from .models import Aventurero, Item
 from django.urls import reverse
+from django.db.models import Max
 
 # Create your views here.
 def index(request):
@@ -37,8 +38,7 @@ def aventurero(request, aventurero_id):
     aventureros = Aventurero.objects.exclude(id = aventurero_id)
     template = loader.get_template('aventurero.html')
     context = {
-        'nombre': aventurero.nombre,
-        'vida': aventurero.vida,
+        'aventurero' : aventurero,
         'items' : items,
         'aventureros' : aventureros
     }
@@ -47,6 +47,18 @@ def aventurero(request, aventurero_id):
 def addAventurero(request):
     template = loader.get_template('addAventurero.html')
     return HttpResponse(template.render({},request))
+
+
+def atacar(request, id_atacante, id_atacado):
+    atacado = Aventurero.objects.get(id=id_atacado)
+    items = Item.objects.all().filter(aventurero_id=id_atacante)
+    item = items.order_by('daño').first()
+
+    if (item != None):
+        atacado.recibirAtaque(item.daño)
+
+        atacado.save()
+    return HttpResponseRedirect(reverse('aventureros'))
 
 
 def item(request, item_id):

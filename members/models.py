@@ -11,6 +11,12 @@ class Aventurero(models.Model):
     def __str__(self):
         return self.nombre
 
+    def recibirAtaque(self, daño):
+        if (self.vida > daño):
+            self.vida -= daño
+        else:
+            self.vida = 0
+
 class Item(models.Model):
     nombre = models.CharField(max_length=100)
     daño = models.IntegerField(default=20)

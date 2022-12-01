@@ -15,6 +15,8 @@ urlpatterns = [
     # ex: /members/aventureros/5/
     path('aventureros/<int:aventurero_id>', views.aventurero, name= 'aventurero'),
 
+    path('aventureros/<int:id_atacante>/attack/<int:id_atacado>', views.atacar),
+
     path('aventureros/delete/<int:id>', views.delete, name='delete'),
 
     #ex: /members/item/1/

@@ -9,8 +9,8 @@
   <table border="1">
   {% for x in aventureros %}
   <tr>
-    <td>{{x.id}}</td>
-    <td>{{x.nombre}}</td>
+    <td> {{x.id}} </td>
+    <td> <a href="{{x.id}}">{{x.nombre}} <a/></td>
     <td>{{x.vida}}</td>
     <td><a href="delete/{{ x.id }}">delete</a></td>
   </tr>

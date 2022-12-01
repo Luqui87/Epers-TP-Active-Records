@@ -5,7 +5,7 @@
     <title>Aventurero</title>
 </head>
 <body>
-    <p>{{nombre}} tiene {{vida}} puntos de vida y su inventario es</p>
+    <p>{{aventurero.nombre}} tiene {{aventurero.vida}} puntos de vida y su inventario es</p>
     <table border="1">
       {% for x in items %}
       <tr>
@@ -17,13 +17,14 @@
   </table>
 
     <h3>Atacar</h3>
+    <p>Atacara con su item de mayor daño</p>
     <table border="1">
   {% for x in aventureros %}
   <tr>
     <td>{{x.id}}</td>
     <td>{{x.nombre}}</td>
     <td>{{x.vida}}</td>
-    <td><a href="delete/{{ x.id }}">atacar</a></td>
+    <td><a href="{{aventurero.id}}/attack/{{x.id}}">atacar</a></td>
   </tr>
   {% endfor %}
   </table>
