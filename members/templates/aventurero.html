@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aventurero</title>
+</head>
+<body>
+    <p>{{nombre}} tiene {{vida}} puntos de vida y su inventario es</p>
+    <table border="1">
+      {% for x in items %}
+      <tr>
+        <td>{{x.id}}</td>
+        <td>{{x.nombre}}</td>
+        <td>{{x.daño}}</td>
+  </tr>
+  {% endfor %}
+  </table>
+
+    <h3>Atacar</h3>
+    <table border="1">
+  {% for x in aventureros %}
+  <tr>
+    <td>{{x.id}}</td>
+    <td>{{x.nombre}}</td>
+    <td>{{x.vida}}</td>
+    <td><a href="delete/{{ x.id }}">atacar</a></td>
+  </tr>
+  {% endfor %}
+  </table>
+</body>
+</html>

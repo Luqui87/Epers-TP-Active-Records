@@ -19,6 +19,10 @@ urlpatterns = [
 
     #ex: /members/item/1/
     path('items/<int:item_id>', views.item, name = 'item'),
-#ex: /members/item/1/
-    path('items/', views.items, name = 'items')
+    #ex: /members/item/1/
+    path('items/', views.items, name = 'items'),
+
+    path('items/add/', views.addItem, ),
+
+    path('items/add/addrecord/', views.addItemPost),
 ]

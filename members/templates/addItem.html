@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Item</title>
+</head>
+<body>
+  <h1>Agregar Item</h1>
+
+  <form action="addrecord/" method="post">
+  {% csrf_token %}
+    Nombre:<br>
+  <input name="nombre">
+  <br><br>
+  daño:<br>
+  <input name="daño">
+  <br><br>
+      Id_Dueño:<br>
+  <input name="Id_Dueño">
+  <br><br>
+  <input type="submit" value="Submit">
+  </form>
+</body>
+</html>
