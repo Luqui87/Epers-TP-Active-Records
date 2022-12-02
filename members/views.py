@@ -56,9 +56,9 @@ def atacar(request, id_atacante, id_atacado):
 
     if (item != None):
         atacado.recibirAtaque(item.daño)
-
         atacado.save()
-    return HttpResponseRedirect(reverse('aventureros'))
+        return HttpResponseRedirect(reverse('aventureros'))
+    return HttpResponse("El aventurero no tiene items")
 
 
 def item(request, item_id):
@@ -82,6 +82,8 @@ def addItemPost(request):
     y = request.POST['daño']
     z = request.POST['Id_Dueño']
     aventurero = Aventurero.objects.get(id=z)
+    if (aventurero == None):
+        return HttpResponse("Ese aventurero no existe")
     item = Item(nombre = x, daño = y, aventurero = aventurero)
     item.save()
     return HttpResponseRedirect(reverse ('items'))
