@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
-from .models import Aventurero, Item
+from .models import Aventurero, Item, Montura
 from django.urls import reverse
 from django.db.models import Max
 
@@ -11,9 +11,14 @@ def index(request):
     return HttpResponse(template.render())
 
 def aventureros(request):
-    aventureros = Aventurero.objects.all().values()
-    # Devuelve una QuerySet no una lista de aventureros
-    # aventureros = Aventurero.objects.raw('SELECT * FROM members_aventurero')
+    letra = request.GET.get('letra', None)
+    if (letra == None):
+        aventureros = Aventurero.objects.all().values()
+        # Devuelve una QuerySet no una lista de aventureros
+        # aventureros = Aventurero.objects.raw('SELECT * FROM members_aventurero')
+    else:
+        letra = letra + '%'
+        aventureros = Aventurero.objects.raw('SELECT * FROM members_aventurero WHERE nombre LIKE %s AND vida > 200',[letra])
     template = loader.get_template('aventureros.html')
     context = {
         'aventureros':aventureros
@@ -87,3 +92,11 @@ def addItemPost(request):
     item = Item(nombre = x, daño = y, aventurero = aventurero)
     item.save()
     return HttpResponseRedirect(reverse ('items'))
+
+def monturas(request):
+    monturas = Montura.objects.all().values()
+    template = loader.get_template('monturas.html')
+    context = {
+        'monturas' : monturas
+    }
+    return HttpResponse(template.render(context,request))

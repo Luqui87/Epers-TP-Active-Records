@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Monturas</title>
+</head>
+<body>
+  <h1>Monturas</h1>
+  <table border="1">
+  {% for x in monturas %}
+  <tr>
+    <td>{{x.nombre}}</td>
+    <td>{{x.velocidad}}</td>
+    <td>{{x.aventurero_id}}</td>
+  </tr>
+  {% endfor %}
+  </table>
+</body>
+</html>

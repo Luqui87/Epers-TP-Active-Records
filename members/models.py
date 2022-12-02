@@ -24,3 +24,18 @@ class Item(models.Model):
 
     def __str__(self):
         return self.nombre
+
+class Montura(models.Model):
+    nombre = models.CharField(max_length=60)
+    velocidad = models.IntegerField(default=20)
+    aventurero = models.OneToOneField(
+        Aventurero,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+
+    def recibioDaño(self, daño):
+        self.velocidad -= (daño/4)
+
+    def __str__(self):
+        return self.nombre

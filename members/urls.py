@@ -27,4 +27,6 @@ urlpatterns = [
     path('items/add/', views.addItem, ),
 
     path('items/add/addrecord/', views.addItemPost),
+
+    path('monturas/', views.monturas,)
 ]

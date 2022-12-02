@@ -1,5 +1,5 @@
 from django.test import TestCase
-from members.models import Aventurero, Item
+from members.models import Aventurero, Item, Montura
 
 class AventureroTestCase(TestCase):
     aventurero = None
@@ -35,5 +35,26 @@ class ItemTestCase(TestCase):
         self.assertEqual(self.item.nombre, "Pistola" )
         self.assertEqual(self.item.daño, 200)
         self.assertEqual(self.item.aventurero, self.aventurero)
+
+class MonturaTestCase(TestCase):
+    aventurero = None
+    def setUp(self):
+        Aventurero.objects.create(nombre="Roland", vida=200)
+        self.aventurero = Aventurero.objects.get(nombre="Roland")
+
+    def test_Recuperar_Montura(self):
+        Montura.objects.create(nombre ="Tornado", velocidad = 20, aventurero = self.aventurero)
+        montura = Montura.objects.get(nombre = "Tornado")
+        self.assertEqual(montura.nombre, "Tornado")
+        self.assertEqual(montura.velocidad, 20)
+        self.assertEqual(montura.aventurero, self.aventurero)
+
+    def test_La_Montura_Recibio_Daño(self):
+        Montura.objects.create(nombre="Tornado", velocidad=20, aventurero=self.aventurero)
+        montura = Montura.objects.get(nombre="Tornado")
+        montura.recibioDaño(8)
+        montura.save()
+        monturaActualizada = Montura.objects.get(nombre="Tornado")
+        self.assertEqual(monturaActualizada.velocidad, 18)
 
 
